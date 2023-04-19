@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<TextView
+    android:id="@+id/question"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="24sp"
+    android:padding="8dp"
+    android:textStyle="bold"
+    android:layout_marginBottom="30dp"
+    android:text="Sample Question Choose one answer ??"
+    />
+    <RadioGroup
+        android:id="@+id/optionset"
+        android:layout_width="match_parent"
+        android:soundEffectsEnabled="true"
+        android:layout_height="wrap_content">
+       
+        <RadioButton
+            android:id="@+id/optionA"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:text="1. Option 1"
+            />
+
+
+        <RadioButton
+            android:id="@+id/optionB"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
+            android:text="2. Option 2" />
+
+
+
+        <RadioButton
+            android:id="@+id/optionC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+        android:text="3. Option 3"
+        />
+
+
+        <RadioButton
+            android:id="@+id/optionD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+        android:text="4. Option 4"
+        />
+
+    </RadioGroup>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_weight="1"
+        android:src="@drawable/refresh"
+        android:background="@color/white"
+        android:contentDescription="Reset" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@color/white"
+        android:layout_weight="1"
+        android:src="@drawable/note_add"
+        android:contentDescription="Mark for review" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        android:layout_margin="4dp"
+        android:src="@drawable/star"
+        android:contentDescription="Add to favourites" />
+
+</LinearLayout>
+    <MultiAutoCompleteTextView
+        android:id="@+id/solution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/dummy" />
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

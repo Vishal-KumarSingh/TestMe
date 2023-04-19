@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExamSection">
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:id="@+id/question_btns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/submitTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Submit Test" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/questionArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:layout_marginTop="70dp"
+        android:layout_alignTop="@id/scrollView"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/navigation"
+        android:layout_alignBottom="@id/questionArea"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/previous"
+            android:layout_weight="1"
+            android:background="@color/white"
+            />
+        <TextView
+            android:id="@+id/questionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No : 1"
+            android:layout_weight="10"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="20dp"
+            />
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next"
+            android:layout_weight="1"
+            android:background="@color/white"
+
+            />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
