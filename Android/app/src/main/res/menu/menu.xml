@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/item_1" android:title="Dashboard"/>
-    <item android:id="@+id/item_2" android:title="Vocab"/>
-    <item android:id="@+id/item_3" android:title="Feedback"/>
-    <item android:id="@+id/log" android:title="Login"/>
+<item android:id="@+id/dashboard" android:title="Dashboard"/>
+    <item android:id="@+id/share" android:title="Share"/>
+    <item android:id="@+id/feedback" android:title="Feedback"/>
+    <item android:id="@+id/rateUs" android:title="Rate Us"/>
+
 </menu>

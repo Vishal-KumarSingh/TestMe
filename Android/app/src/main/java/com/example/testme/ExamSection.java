@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,9 @@ private int currentQuestion = 0;
     private  Button submitBtn;
 ImageButton next,prev;
 LinearLayout question_btns;
-TextView questionLabel;
+TextView questionLabel , testName;
 JSONArray arrayList;
+private TextView testTimer;
 public AnswerKey answer;
     ArrayList<Button> buttonarr;
     @SuppressLint("MissingInflatedId")
@@ -44,7 +46,9 @@ public AnswerKey answer;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_section);
         examId = getIntent().getStringExtra("id");
+        testTimer = findViewById(R.id.testTimer);
         answer = new AnswerKey();
+        testName = findViewById(R.id.testName);
         if(examId.equals("")){
             Toast.makeText(this, "Test Id absent", Toast.LENGTH_SHORT).show();
             finish();
@@ -59,12 +63,24 @@ public AnswerKey answer;
         Context context = this;
         question_btns = findViewById(R.id.question_btns);
         submitBtn = findViewById(R.id.submitTest);
-
+        LoadingDialog loadingDialog = new LoadingDialog(ExamSection.this);
+        loadingDialog.startLoadingDialog("Downloading Question Paper");
         new HitAPI().sendJsonPostRequest("QuestionPaper", this, jsn, new APICallback() {
             @Override
             public void response(JSONObject jsonobj) {
+                loadingDialog.dismissDialog();
                 try {
                     arrayList = jsonobj.getJSONArray("data");
+                    String testTime = jsonobj.getJSONArray("testdetail").getJSONObject(0).getString("time");
+                    String nameofTest = jsonobj.getJSONArray("testdetail").getJSONObject(0).getString("name");
+                    testName.setText(nameofTest);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Debug.log("calling time updater " + testTime);
+                            TimeUpdater(Integer.parseInt(testTime) , 0);
+                        }
+                    }).start();
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -108,11 +124,13 @@ public AnswerKey answer;
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingDialog.startLoadingDialog("Submitting Test");
                 Debug.log(answer.getJSON().toString());
                 JSONObject jsn = new JSONObject();
                 try {
                     jsn.put("answer" , answer.getJSON());
                     jsn.put("examId" , examId);
+                    jsn.put("timetaken" , "120");
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -120,10 +138,11 @@ public AnswerKey answer;
                 new HitAPI().sendJsonPostRequest("submitTest", context, jsn, new APICallback() {
                     @Override
                     public void response(JSONObject jsonobj) {
+                        loadingDialog.dismissDialog();
                         Intent intent = new Intent(context , ResultActivity.class);
                         try {
-                            jsonobj.put("marks" , "200");
-                            jsonobj.put("testname" , "Database Normalisation");
+                            jsonobj.put("marks" , jsonobj.get("marks"));
+                            jsonobj.put("testname" , jsonobj.get("name"));
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -156,6 +175,42 @@ public AnswerKey answer;
 //            next.setEnabled(true);
 //            prev.setEnabled(true);
 //        }
+    }
+   private void setTextofTimer(String text){
+        testTimer.setText(text);
+   }
+    @SuppressLint("SetTextI18n")
+    private void TimeUpdater(int minute , int seconds){
+        Debug.log("timer started for " + minute + " " + seconds);
+        while(minute!=-1) {
+            while (seconds != 0) {
+                seconds = seconds - 1;
+                int finalMinute = minute;
+                int finalSeconds = seconds;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setTextofTimer(finalMinute + ":" + finalSeconds);
+                    }
+                });
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            minute = minute-1;
+            seconds = 60;
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                submitBtn.performClick();
+            }
+        });
+
+
     }
 }
 

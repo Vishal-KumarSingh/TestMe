@@ -1,9 +1,11 @@
 package com.example.testme.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,6 +20,8 @@ import com.example.testme.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.Objects;
 
 public class ExamSectionViewPagerAdapter extends  RecyclerView.Adapter<ExamSectionViewPagerAdapter.QuestionViewHolder> {
     Context context;
@@ -52,11 +56,42 @@ public class ExamSectionViewPagerAdapter extends  RecyclerView.Adapter<ExamSecti
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     Debug.log("Question no " + holder.getAdapterPosition()+ " value selected " + i);
-                    RadioButton radioButton =(RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
-                   String s = (String) radioButton.getText();
-                   Debug.log(String.valueOf(s.charAt(0)));
-                   answer.setAnswer(holder.getAdapterPosition() , s);
-
+                    if(radioGroup.getCheckedRadioButtonId() != -1) {
+                        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+                        String s = (String) radioButton.getText();
+                        Debug.log(String.valueOf(s.charAt(0)));
+                        answer.setAnswer(holder.getAdapterPosition(), s);
+                    }
+                }
+            });
+            holder.resetbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    holder.optionset.clearCheck();;
+                }
+            });
+            holder.favourites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!holder.favourite){
+                        holder.favourite = true;
+                        holder.favourites.setImageResource(R.drawable.baseline_star_24);
+                    }else{
+                        holder.favourite = false;
+                        holder.favourites.setImageResource(R.drawable.star);
+                    }
+                }
+            });
+            holder.mark_for_review.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!holder.review){
+                        holder.review = true;
+                        holder.mark_for_review.setImageResource(R.drawable.review_marked);
+                    }else{
+                        holder.review = false;
+                        holder.mark_for_review.setImageResource(R.drawable.note_add);
+                    }
                 }
             });
         } catch (JSONException e) {
@@ -75,6 +110,8 @@ public class ExamSectionViewPagerAdapter extends  RecyclerView.Adapter<ExamSecti
         public int question_no;
         public RadioGroup optionset;
         public TextView question;
+        public ImageButton resetbtn, mark_for_review, favourites;
+        public boolean favourite , review;
         public MultiAutoCompleteTextView solution;
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +122,11 @@ public class ExamSectionViewPagerAdapter extends  RecyclerView.Adapter<ExamSecti
             optionset = itemView.findViewById(R.id.optionset);
             question = itemView.findViewById(R.id.question);
             solution  = itemView.findViewById(R.id.solution);
-
+            resetbtn = itemView.findViewById(R.id.resetAnswer);
+            mark_for_review = itemView.findViewById(R.id.markforreview);
+            favourites = itemView.findViewById(R.id.favourites);
+            favourite = false;
+            review = false;
         }
     }
 }

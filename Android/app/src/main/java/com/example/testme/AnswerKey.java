@@ -11,7 +11,8 @@ public class AnswerKey {
     private JSONObject jsn;
     public void setAnswer(int question_no , String optionNo){
         try {
-            jsn.put(String.valueOf(question_no), optionNo);
+            String answerNo = optionNo.substring(0 , 1);
+            jsn.put(String.valueOf(question_no), answerNo);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

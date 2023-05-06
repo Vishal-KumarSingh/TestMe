@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="24sp"
-    android:padding="8dp"
+    android:padding="12dp"
     android:textStyle="bold"
     android:layout_marginBottom="30dp"
     android:text="Sample Question Choose one answer ??"
@@ -70,8 +70,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="20dp"
     >
     <ImageButton
+        android:id="@+id/resetAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -80,6 +82,7 @@
         android:background="@color/white"
         android:contentDescription="Reset" />
     <ImageButton
+        android:id="@+id/markforreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -88,6 +91,7 @@
         android:src="@drawable/note_add"
         android:contentDescription="Mark for review" />
     <ImageButton
+        android:id="@+id/favourites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -102,6 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
+        android:visibility="invisible"
         android:text="@string/dummy" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>
