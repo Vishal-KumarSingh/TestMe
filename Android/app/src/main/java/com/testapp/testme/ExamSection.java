@@ -185,16 +185,6 @@ public class ExamSection extends AppCompatActivity {
                 viewPager2.setCurrentItem(currentQuestion);
         }
 
-//        if(i == arrayList.size()-1){
-//              next.setEnabled(false);
-//            prev.setEnabled(true);
-//        }else if (i==0){
-//            prev.setEnabled(false);
-//            next.setEnabled(true);
-//        }else{
-//            next.setEnabled(true);
-//            prev.setEnabled(true);
-//        }
     }
 
     private void setTextofTimer(String text) {

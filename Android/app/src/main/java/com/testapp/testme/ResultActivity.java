@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.testapp.testme.APItools.APICallback;
 import com.testapp.testme.APItools.HitAPI;
@@ -27,6 +30,7 @@ ImageView b;
 JSONObject jsn;
 Context context = this;
 Button examSolution , resultAnalysis;
+ImageButton whatsappShare , facebookShare;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ Button examSolution , resultAnalysis;
         examSolution = findViewById(R.id.examSolution);
         resultAnalysis = findViewById(R.id.resultAnalysis);
         marks = findViewById(R.id.total);
+        whatsappShare = findViewById(R.id.whatsappShare);
+        facebookShare = findViewById(R.id.facebookShare);
         Context c = this;
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +86,23 @@ Button examSolution , resultAnalysis;
             } , true);
         }
 
-
+        whatsappShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent uriIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("whatsapp://send?text=" + "Hey I am practicing free mock test at Test and Peek Download this app now " + App.googlePlayLink));
+                startActivity(uriIntent);
+            }
+        });
+        facebookShare.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT,App.shareText);
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, App.shareTitle);
+                startActivity(Intent.createChooser(shareIntent, "Share..."));
+            }
+        });
 
 
     }
@@ -133,5 +155,6 @@ Button examSolution , resultAnalysis;
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
