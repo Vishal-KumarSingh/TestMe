@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBF1FD"
     tools:context=".ResultActivity">
     <ImageView
         android:id="@+id/backbtn"
@@ -25,8 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textSize="14sp"
-            android:text="Test Name Here" />
+
+            android:textSize="24sp"
+            android:text="" />
 
         <TextView
             android:id="@+id/remarks"
@@ -34,13 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/testname"
             android:layout_margin="10dp"
-            android:textSize="24sp"
+            android:textSize="14sp"
             android:text="Congratulations" />
     </LinearLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/marks"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:elevation="20dp"
         android:layout_margin="20dp"
         app:cardElevation="4dp"
@@ -66,10 +68,12 @@
                 android:id="@+id/total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textStyle="bold"
+                android:text="44"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="30sp"
+                android:textStyle="bold"
+
+               />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
