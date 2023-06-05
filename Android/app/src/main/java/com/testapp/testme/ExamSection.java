@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -231,8 +232,21 @@ public class ExamSection extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-     examCount = false;
-     super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Your test progress will be lost");
+        builder.setMessage("Do you still want to go Back ? ");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                ExamSection.super.onBackPressed();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.show();
     }
 }
 

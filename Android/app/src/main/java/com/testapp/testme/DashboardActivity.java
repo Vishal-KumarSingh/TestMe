@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private DrawerLayout drawer;
     private TextView navUserName;
     private NavigationView navview;
+    private ImageView accountIcon;
     Toolbar toolbar;
     Context context;
     RecyclerView recyclerView;
@@ -58,14 +61,35 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         navview.setNavigationItemSelectedListener(this);
         View headerview = navview.getHeaderView(0);
         navUserName = headerview.findViewById(R.id.navUserName);
+        accountIcon = headerview.findViewById(R.id.accountIcon);
         String username = Session.getUserName();
         if(Objects.equals(username, "")){
             loadUserName();
         }else{
             navUserName.setText(Session.getUserName());
         }
+        showProfilePageOnNavUserNameClick();
+
 
         downloadTest();
+    }
+
+    private void showProfilePageOnNavUserNameClick() {
+        navUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DashboardActivity.this  ,ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+        accountIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DashboardActivity.this  ,ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void loadUserName() {

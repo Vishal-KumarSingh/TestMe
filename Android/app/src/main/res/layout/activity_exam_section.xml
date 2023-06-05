@@ -55,11 +55,11 @@
         android:orientation="horizontal"
         >
         <HorizontalScrollView
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="80dp"
             android:id="@+id/scrollView"
             android:layout_weight="2"
             android:layout_width="90pt"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             >
         <LinearLayout
             android:id="@+id/question_btns"

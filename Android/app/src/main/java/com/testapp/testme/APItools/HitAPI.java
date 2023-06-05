@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public class HitAPI {
-    public static final String url = "https://selftestapi.000webhostapp.com/testMe/index.php";
+    public static final String url = "https://selftestapi.000webhostapp.com/index.php";
     public void sendJsonPostRequest(String action , JSONObject jsonobj ,APICallback callback, boolean Addtoken) {
         Context context = ContextHolder.getContext();
         try {
@@ -44,7 +44,7 @@ public class HitAPI {
                             try {
                                 if(!response.get("token").toString().equals(Session.getToken())){
                                     Session.setToken( response.get("token").toString());
-                                    Toast.makeText(context, "Token updated "+Session.getToken(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(context, "Token updated "+Session.getToken(), Toast.LENGTH_SHORT).show();
 
                                 }
                                 if(!response.get("toast").toString().equals("")){

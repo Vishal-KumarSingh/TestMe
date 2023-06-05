@@ -105,6 +105,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:contentDescription="Facebook Share"
                     android:id="@+id/facebookShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,6 +114,7 @@
                     android:src="@drawable/facebook" />
 
                 <ImageButton
+                    android:contentDescription="Whatsapp Share"
                     android:id="@+id/whatsappShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

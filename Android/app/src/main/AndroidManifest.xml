@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMe">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Analysis"
             android:exported="false" />
         <activity
